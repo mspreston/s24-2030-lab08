@@ -1,0 +1,47 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python Debugger: Step 1--Review",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "grades_processing",
+            "console": "integratedTerminal",
+            "args": ["review"]
+        },
+        {
+            "name": "Python Debugger: Step 1--Probation",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "grades_processing",
+            "console": "integratedTerminal",
+            "args": ["probation"]
+        },   
+        {
+            "name": "Python Debugger: Step 1--All",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "grades_processing",
+            "console": "integratedTerminal"
+        },   
+        {
+            "name": "Python Debugger: Step 2--JSON",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "grades_reviewing",
+            "console": "integratedTerminal",
+            "args": ["academic_probation.json"]
+        },   
+        {
+            "name": "Python Debugger: Step 2--PKL",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "grades_reviewing",
+            "console": "integratedTerminal",
+            "args": ["all_students.pkl"]
+        }
+    ]
+}
