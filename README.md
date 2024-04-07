@@ -1,28 +1,36 @@
-# CPSC 2030 (Lab_08)
+# CPSC 2030 (Lab_09)
 
-Tuesday, April 9th
+Tuesday, March 26th
 
-**Due**: By the end of the day (Monday, April 15th)
+**Due**: By the end of the day (Tuesday, April 9th)
 
 **Instructions**  
-Write a program that prompts the user to enter 10 even numbers, ignoring any odd numbers entered, then prints out the array neatly.
+For this lab, you will gain additional exposure to exceptions and serialization in Python (as well as working with .gitignore and debug configurations). I have provided you with starter code in `grades_processing.py` + `grades_reviewing.py`. You should ensure that the steps outlined below for the processing file are satisfied before moving to the reviewing phase.
 
 You should satisfy the following requirements:
-- Write a *function* that returns a *Boolean* (true if the passed parameter is an even number, and false if the number passed is odd).
-- Prompt the user to enter an integer, and *if it is odd* (use your function in step #2!), store the number in an integer array.
-- Continue to prompt the user until they enter 10 odd numbers (ignoring any even numbers, unless completing the optional task) and re-prompting them to enter an odd number.
-- Print (neatly) the contents of the array.
-- Use good programming style.
-
-Optional Requirements (2 bonus points):
-- Create an integer array that stores all even numbers entered by the user.
-- Write a *function* that returns a *float* that shows the average of all even integers entered.
-- After printing the contents of the odd integer array (in the requirements above), print the average of the even integer array and notify the user how many even numbers were entered.
-
-Good Programming Style:
-- File begins with a header containing Doxygen comments, including @file, brief description, @author, @date
-- Uses #define or const variables for all constants.
-- Variables are i) clearly named according to purpose; 2) declared at the beginning of the function; 3) initialized when declared; 4) commented on the same line when declared
-- Code is commented for each task (not necessarily every line)
-- Indentation is consistent inside each level of {} in if/for/while statements.
-- Program exists with `return 0;`
+- Processing (`grades_processing.py`)
+  - Implement the `process_grade()` function for the `Student` class.
+    - This should calculate and return the average of the values in `self.grades`.
+    - Use a try-except statement to capture invalid input with a `ValueError` exception block, print an informative statement, and return None.
+  - Implement the `read_csv_data()` function.
+    - This should accept a file path and use a context manager (i.e. `with open()`)
+    - Use a try-except statement to capture invalid input for a file that does not exist and print an informative statement.
+    - Returns a list of a list of strings.
+  - Implement the steps for data processing
+    - Once the csv file is read, we will have a list of all students in the `students` list. 
+    - The `mode` variable is keyed off args passed in from the `launch.json` file. (If you are not using VS Code, you will need to manually modify the `mode` function from None to `review` and then `probation`.)
+    - If the mode is review, iterate over all students and append each instance of the Student class to the `for_review` list if the student has an average grade of None.
+    - If the mode is probation, iterate over all students and append the ID + Average properties as a dictionary to the `academic_probation` list, if the student has an average grade below 50 and the `is_improving` property is False.
+  - Implement the steps for data export
+    - If the mode is review, export the `for_review` variable to the identified JSON file (`for_review.json`).
+    - If the mode is probation, export the `academic_probation` variable to the identified JSON file (`academic_probation.json`).
+    - If the mode is anything else, export the entire collection of students to the identified pkl file (`all_students.pkl`).
+- Reviewing (`grades_reviewing.py`)
+  - Implement the `read_pkl_data()` function that returns a list of instances of the Student class from the identified file (`all_students.pkl`).
+    - Use a try-except statement to capture invalid input for a file that does not exist and print an informative statement.
+  - Implement the `read_json_data()` function that returns a list of float numbers from the identified file (`academic_probation.json`).
+    - The academic probation file contains student IDs and grade averages. We want to extract only the grade average in this function. 
+    - Use a try-except statement to capture invalid input for a file that does not exist and print an informative statement.
+- .gitignore
+  - The current gitignore file is set to ignore CSV files in any commits.
+  - Modify this file so that it also ignores any output files (.json and .pkl) that are created in this lab. 
